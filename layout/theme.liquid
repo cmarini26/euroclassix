@@ -302,6 +302,18 @@
          nextArrow: '<span class="next-arrow"><img src="https://cdn.shopify.com/s/files/1/0013/2854/5910/files/next-arrow.png?10919012138880730684" /></span>',
   prevArrow: '<span class="prev-arrow"><img src="https://cdn.shopify.com/s/files/1/0013/2854/5910/files/left-arrow.png?10919012138880730684" /></span>'
 });
+     // Thumbnail grid under the description: jump the slider to the clicked image
+     $('.product-images-thumbs').on('click', '.product-images-thumbs__item', function() {
+       var $slider = $('.product-images-slider');
+       $slider.slick('slickGoTo', $(this).data('slide'));
+       if ($slider.offset().top < $(window).scrollTop()) {
+         $('html, body').animate({ scrollTop: $slider.offset().top - 20 }, 300);
+       }
+     });
+     $('.product-images-slider').on('afterChange', function(event, slick, currentSlide) {
+       $('.product-images-thumbs__item').removeClass('is-active')
+         .filter('[data-slide="' + currentSlide + '"]').addClass('is-active');
+     });
      
      
      

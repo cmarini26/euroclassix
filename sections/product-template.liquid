@@ -38,7 +38,7 @@
     <div class="product-images-slider">
        {% for image in product.images %}
   <div>
-                  <img class="" src="{{ image | img_url: '1920x' }}" />
+                  <img class="" src="{{ image | img_url: '1920x' }}" alt="{{ image.alt | default: product.title | escape }}" />
 </div>
       {% endfor %}
       </div>
@@ -230,6 +230,15 @@
           <div class="product-single__description rte" itemprop="description">
             {{ product.description }}
           </div>
+          {% if product.images.size > 1 %}
+          <div class="product-images-thumbs">
+            {% for image in product.images %}
+              <button type="button" class="product-images-thumbs__item{% if forloop.first %} is-active{% endif %}" data-slide="{{ forloop.index0 }}">
+                <img src="{{ image | img_url: '240x180', crop: 'center' }}" alt="{{ image.alt | default: product.title | escape }}" loading="lazy" />
+              </button>
+            {% endfor %}
+          </div>
+          {% endif %}
           {% if section.settings.social_sharing_products %}
             {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
           {% endif %}

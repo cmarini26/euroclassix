@@ -210,6 +210,38 @@ font-family: 'InterFace';
 .product-images-slider .slick-slide img {
     width: 100% !important;
 }
+
+.product-images-thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 30px 0;
+}
+@media (max-width: 749px) {
+    .product-images-thumbs {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.product-images-thumbs__item {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+.product-images-thumbs__item img {
+    width: 100%;
+    display: block;
+    opacity: .6;
+    border: 2px solid transparent;
+    transition: opacity .2s, border-color .2s;
+}
+.product-images-thumbs__item:hover img,
+.product-images-thumbs__item.is-active img {
+    opacity: 1;
+}
+.product-images-thumbs__item.is-active img {
+    border-color: #991b1e;
+}
 .modalDialog h2 {
     color: #991b1e;
     text-align: center;

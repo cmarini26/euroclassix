@@ -1,0 +1,12 @@
+{
+  // Use the Shopify extension as the Liquid formatter
+  "[liquid]": {
+    "editor.defaultFormatter": "Shopify.theme-check-vscode",
+    // Off at first: formatting a legacy theme on save creates huge diffs
+    "editor.formatOnSave": false
+  },
+  // Treat .liquid files as Liquid (not HTML) everywhere
+  "files.associations": {
+    "*.liquid": "liquid"
+  }
+}

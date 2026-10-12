@@ -1,0 +1,5 @@
+# Keep the recommended rules, but don't flag legacy includes yet
+extends: :theme_app_extension_recommended
+
+ConvertIncludeToRender:
+  enabled: false

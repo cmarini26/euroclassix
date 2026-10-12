@@ -1,0 +1,155 @@
+<div class="featured-collection" data-section-id="{{ section.id }}" data-section-type="featured-collection-section">
+  {% comment %}
+    By default, featured products come from your Frontpage collection.
+    This collection is empty by default and must have products added to it
+  {% endcomment %}
+  {% if section.settings.home_featured_products == blank %}
+    {% assign featured_collection = "frontpage" %}
+  {% else %}
+    {% assign featured_collection = section.settings.home_featured_products  %}
+  {% endif %}
+
+  {% comment %}Heading for screen readers{% endcomment %}
+  <h2 class="featured-col-head">{{ section.settings.heading }}</h2>
+<div class="arrow-down">
+  <img class="" src="https://cdn.shopify.com/s/files/1/0013/2854/5910/files/arrows.png?2247647819136620127" />
+  </div>
+  <div class="grid grid--no-gutters grid--uniform collection-grid">
+  </div>
+    {% comment %}
+      Set grid item widths based on settings
+    {% endcomment %}
+<div class="f-col-home">
+  {% include 'product-grid-width' with product_image_type, product_image_type: section.settings.product_image_type, product_image_size: section.settings.product_image_size %}
+
+    {% unless section.settings.home_featured_products == blank %}
+      {% for product in collections[featured_collection].products limit:4 %}
+        {% assign price = product.price | money_without_trailing_zeros %}
+        {% include 'product-grid-item' with product_image_spacing, product_image_spacing: section.settings.product_image_spacing, vendor_enable: section.settings.vendor_enable %}
+      {% else %}
+        {% comment %}
+          If collection is empty, show onboarding state
+          For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
+        {% endcomment %}
+        {% include 'onboarding-featured-collection' with product_image_spacing, product_image_spacing: section.settings.product_image_spacing %}
+
+      {% endfor %}
+    {% else %}
+      {% include 'onboarding-featured-collection' with product_image_spacing, product_image_spacing: section.settings.product_image_spacing %}
+    {% endunless %}
+
+  </div>
+  <a class="f-col-seemore" href="{{ section.settings.seemore_link }}">SEE MORE</a>
+  </div>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "class": "index-section featured-collection-section",
+    "settings": [{
+        "type": "header",
+        "content": "Collection"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Featured Heading"
+	  },
+      {
+        "type": "url",
+        "id": "seemore_link",
+        "label": "See More Link"
+	  },
+	  {
+        "type": "collection",
+        "id": "home_featured_products",
+        "label": "Collection"
+      },
+	  {
+        "type": "header",
+        "content": "Image"
+      },
+      {
+        "type": "select",
+        "id": "product_image_type",
+        "label": "Image style",
+        "options": [
+          {
+            "value": "portrait",
+            "label": "Tall/square"
+          },
+          {
+            "value": "landscape",
+            "label": "Wide"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "product_image_size",
+        "label": "Image size",
+        "default": "medium",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          },
+          {
+            "value": "xlarge",
+            "label": "Extra large"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "product_image_spacing",
+        "label": "Enable image spacing"
+      },
+      {
+        "type": "checkbox",
+        "id": "vendor_enable",
+        "label": "Show product vendor"
+      }],
+    "presets": [{
+      "name": "Featured collection",
+      "category": "Collection"
+    }]
+  }
+{% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% include 'product-grid-width' with product_image_type: section.settings.product_image_type,
+    product_image_size: section.settings.product_image_size %}"
+  to: "{% include 'product-grid-width' with product_image_type, product_image_type:
+    section.settings.product_image_type, product_image_size: section.settings.product_image_size
+    %}"
+  position: 976..1148
+- from: "{% include 'product-grid-item' with product_image_spacing: section.settings.product_image_spacing,
+    vendor_enable: section.settings.vendor_enable %}"
+  to: "{% include 'product-grid-item' with product_image_spacing, product_image_spacing:
+    section.settings.product_image_spacing, vendor_enable: section.settings.vendor_enable
+    %}"
+  position: 1375..1545
+- from: "{% include 'onboarding-featured-collection' with product_image_spacing: section.settings.product_image_spacing
+    %}"
+  to: "{% include 'onboarding-featured-collection' with product_image_spacing, product_image_spacing:
+    section.settings.product_image_spacing %}"
+  position: 1807..1943
+- from: "{% include 'onboarding-featured-collection' with product_image_spacing: section.settings.product_image_spacing
+    %}"
+  to: "{% include 'onboarding-featured-collection' with product_image_spacing, product_image_spacing:
+    section.settings.product_image_spacing %}"
+  position: 1985..2121
+{% endcomment %}

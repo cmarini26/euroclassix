@@ -94,7 +94,14 @@
       font-size:16px;
     }
   }
-
+    .custom-added-by-hafiz-Muhammad-Afaq-Mustafai-four{
+      height: 216px !important; 
+    object-fit: cover !important;
+   } 
+   .custom-added-by-hafiz-Muhammad-Afaq-Mustafai-five{
+    margin: 0px 20px!important ;
+      height: 270px !important; 
+   }
 </style>
 <!-- custom-added-by-hafiz-Muhammad-Afaq-Mustafai +923260956300 -->
 
@@ -291,7 +298,9 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <script type="text/javascript">
-   $( document ).ready(function() { 
+   // Pass in the jQuery loaded above (with slick 1.8.1): the deferred vendor.js
+   // later replaces the global $ with its own jQuery and an older slick.
+   jQuery(function($) {
      $('.product-images-slider').slick({
   infinite: true,
   slidesToShow: 1,
